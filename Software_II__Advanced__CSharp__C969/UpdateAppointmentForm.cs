@@ -7,7 +7,6 @@ namespace Software_II__Advanced__CSharp__C969
 {
     public partial class UpdateAppointmentForm : Form
     {
-        // The appointment to be updated.
         private Appointment currentAppointment;
 
         public UpdateAppointmentForm(Appointment appointment)
@@ -21,10 +20,8 @@ namespace Software_II__Advanced__CSharp__C969
         {
             try
             {
-                // Get selected customer.
                 int customerId = Convert.ToInt32(comboBoxCustomer.SelectedValue);
 
-                // Retrieve updated details.
                 string title = txtTitle.Text.Trim();
                 string description = txtDescription.Text.Trim();
                 string location = txtLocation.Text.Trim();
@@ -32,10 +29,8 @@ namespace Software_II__Advanced__CSharp__C969
                 string type = txtType.Text.Trim();
                 string url = txtUrl.Text.Trim();
 
-                // Get the selected date.
                 DateTime selectedDate = dtpDate.Value.Date;
 
-                // Get the selected times.
                 string startTimeStr = comboBoxStartTime.SelectedItem.ToString();
                 string endTimeStr = comboBoxEndTime.SelectedItem.ToString();
 
@@ -51,7 +46,6 @@ namespace Software_II__Advanced__CSharp__C969
                     return;
                 }
 
-                // Update the current appointment object.
                 currentAppointment.CustomerId = customerId;
                 currentAppointment.Title = title;
                 currentAppointment.Description = description;
@@ -61,7 +55,6 @@ namespace Software_II__Advanced__CSharp__C969
                 currentAppointment.Url = url;
                 currentAppointment.Start = startDateTime.ToUniversalTime();
                 currentAppointment.End = endDateTime.ToUniversalTime();
-                // Optionally update UpdatedBy, etc.
 
                 AppointmentManager.UpdateAppointment(currentAppointment);
                 MessageBox.Show("Appointment updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -78,8 +71,8 @@ namespace Software_II__Advanced__CSharp__C969
         private void PopulateTimeComboBox(ComboBox combo)
         {
             combo.Items.Clear();
-            DateTime time = DateTime.Today.AddHours(8);  // 8:00 AM
-            DateTime dtEnd = DateTime.Today.AddHours(22);  // 10:00 PM
+            DateTime time = DateTime.Today.AddHours(8);  
+            DateTime dtEnd = DateTime.Today.AddHours(22);  
             while (time <= dtEnd)
             {
                 combo.Items.Add(time.ToString("hh:mm tt"));
@@ -91,33 +84,26 @@ namespace Software_II__Advanced__CSharp__C969
 
         private void UpdateAppointmentForm_Load(object sender, EventArgs e)
         {
-            // Populate customer ComboBox.
             DataTable dtCustomers = CustomerDAO.GetCustomers();
             comboBoxCustomer.DisplayMember = "customerName";
             comboBoxCustomer.ValueMember = "customerId";
             comboBoxCustomer.DataSource = dtCustomers;
 
-            // Populate time ComboBoxes.
             PopulateTimeComboBox(comboBoxStartTime);
             PopulateTimeComboBox(comboBoxEndTime);
 
-            // Preselect the customer.
             comboBoxCustomer.SelectedValue = currentAppointment.CustomerId;
 
-            // Convert stored UTC times to local time.
             DateTime localStart = currentAppointment.Start.ToLocalTime();
             DateTime localEnd = currentAppointment.End.ToLocalTime();
 
-            // Set the DateTimePicker to the appointment date.
             dtpDate.Value = localStart.Date;
 
-            // Preselect the times in the ComboBoxes.
             string startTimeStr = localStart.ToString("hh:mm tt");
             string endTimeStr = localEnd.ToString("hh:mm tt");
             comboBoxStartTime.SelectedItem = startTimeStr;
             comboBoxEndTime.SelectedItem = endTimeStr;
 
-            // Prepopulate other fields.
             txtTitle.Text = currentAppointment.Title;
             txtDescription.Text = currentAppointment.Description;
             txtLocation.Text = currentAppointment.Location;

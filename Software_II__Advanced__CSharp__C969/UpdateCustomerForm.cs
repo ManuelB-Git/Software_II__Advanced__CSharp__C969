@@ -21,7 +21,6 @@ namespace Software_II__Advanced__CSharp__C969
             txtAddress.Text = currentCustomer.Address;
             txtPostalCode.Text = currentCustomer.PostalCode;
             txtPhone.Text = currentCustomer.Phone;
-            // The city ComboBox will be set in the Load event.
         }
 
 

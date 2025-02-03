@@ -48,10 +48,9 @@ namespace Software_II__Advanced__CSharp__C969
 
         private void AddCustomerForm_Load(object sender, EventArgs e)
         {
-            // Populate the city ComboBox.
             DataTable dtCities = CityDAO.GetCities();
-            comboBoxCity.DisplayMember = "city";      // Display the city name.
-            comboBoxCity.ValueMember = "cityId";        // Use cityId as the value.
+            comboBoxCity.DisplayMember = "city";      
+            comboBoxCity.ValueMember = "cityId";        
             comboBoxCity.DataSource = dtCities;
         }
     }

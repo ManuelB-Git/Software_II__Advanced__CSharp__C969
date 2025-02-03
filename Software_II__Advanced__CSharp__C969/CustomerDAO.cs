@@ -6,7 +6,6 @@ namespace Software_II__Advanced__CSharp__C969
 {
     public static class CustomerDAO
     {
-        // Retrieve customer records along with address and city name.
         public static DataTable GetCustomers()
         {
             DataTable dt = new DataTable();
@@ -27,7 +26,6 @@ namespace Software_II__Advanced__CSharp__C969
             return dt;
         }
 
-        // Adds a new customer by inserting into the address and customer tables (within a transaction).
         public static void AddCustomer(Customer customer)
         {
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
@@ -36,8 +34,7 @@ namespace Software_II__Advanced__CSharp__C969
                 MySqlTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    // Insert into the address table.
-                    // Note: We now insert the cityId instead of a "state" column.
+
                     string addressQuery = @"
                         INSERT INTO address 
                            (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy)
@@ -49,10 +46,9 @@ namespace Software_II__Advanced__CSharp__C969
                     addressCmd.Parameters.AddWithValue("@cityId", customer.CityId);
                     addressCmd.Parameters.AddWithValue("@postalCode", customer.PostalCode);
                     addressCmd.Parameters.AddWithValue("@phone", customer.Phone);
-                    addressCmd.Parameters.AddWithValue("@createdBy", "test"); // Replace with the logged-in user if available.
+                    addressCmd.Parameters.AddWithValue("@createdBy", "test"); 
                     int addressId = Convert.ToInt32(addressCmd.ExecuteScalar());
 
-                    // Insert into the customer table.
                     string customerQuery = @"
                         INSERT INTO customer 
                            (customerName, addressId, active, createDate, createdBy, lastUpdateBy)
@@ -74,7 +70,6 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
-        // Updates an existing customer and its associated address record.
         public static void UpdateCustomer(Customer customer)
         {
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
@@ -83,13 +78,11 @@ namespace Software_II__Advanced__CSharp__C969
                 MySqlTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    // Get the addressId associated with this customer.
                     string getAddressIdQuery = "SELECT addressId FROM customer WHERE customerId = @customerId";
                     MySqlCommand getCmd = new MySqlCommand(getAddressIdQuery, conn, transaction);
                     getCmd.Parameters.AddWithValue("@customerId", customer.CustomerId);
                     int addressId = Convert.ToInt32(getCmd.ExecuteScalar());
 
-                    // Update the address record.
                     string updateAddressQuery = @"
                         UPDATE address 
                         SET address = @address, cityId = @cityId, postalCode = @postalCode, phone = @phone,
@@ -104,7 +97,6 @@ namespace Software_II__Advanced__CSharp__C969
                     updateAddressCmd.Parameters.AddWithValue("@addressId", addressId);
                     updateAddressCmd.ExecuteNonQuery();
 
-                    // Update the customer record.
                     string updateCustomerQuery = @"
                         UPDATE customer 
                         SET customerName = @customerName, lastUpdate = NOW(), lastUpdateBy = @updatedBy 
@@ -125,7 +117,6 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
-        // Deletes a customer and the associated address record.
         public static void DeleteCustomer(int customerId)
         {
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
@@ -134,19 +125,16 @@ namespace Software_II__Advanced__CSharp__C969
                 MySqlTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    // Get the addressId for the customer.
                     string getAddressIdQuery = "SELECT addressId FROM customer WHERE customerId = @customerId";
                     MySqlCommand getCmd = new MySqlCommand(getAddressIdQuery, conn, transaction);
                     getCmd.Parameters.AddWithValue("@customerId", customerId);
                     int addressId = Convert.ToInt32(getCmd.ExecuteScalar());
 
-                    // Delete the customer record.
                     string deleteCustomerQuery = "DELETE FROM customer WHERE customerId = @customerId";
                     MySqlCommand deleteCustomerCmd = new MySqlCommand(deleteCustomerQuery, conn, transaction);
                     deleteCustomerCmd.Parameters.AddWithValue("@customerId", customerId);
                     deleteCustomerCmd.ExecuteNonQuery();
 
-                    // Delete the associated address record.
                     string deleteAddressQuery = "DELETE FROM address WHERE addressId = @addressId";
                     MySqlCommand deleteAddressCmd = new MySqlCommand(deleteAddressQuery, conn, transaction);
                     deleteAddressCmd.Parameters.AddWithValue("@addressId", addressId);
