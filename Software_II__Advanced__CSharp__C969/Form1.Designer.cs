@@ -35,6 +35,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelDisplayUserLanguage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtUsername
@@ -99,11 +101,31 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Password: ";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(170, 281);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "User Language";
+            // 
+            // labelDisplayUserLanguage
+            // 
+            this.labelDisplayUserLanguage.AutoSize = true;
+            this.labelDisplayUserLanguage.Location = new System.Drawing.Point(294, 281);
+            this.labelDisplayUserLanguage.Name = "labelDisplayUserLanguage";
+            this.labelDisplayUserLanguage.Size = new System.Drawing.Size(35, 13);
+            this.labelDisplayUserLanguage.TabIndex = 8;
+            this.labelDisplayUserLanguage.Text = "label5";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.labelDisplayUserLanguage);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -129,6 +151,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelDisplayUserLanguage;
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Software_II__Advanced__CSharp__C969
@@ -17,28 +18,42 @@ namespace Software_II__Advanced__CSharp__C969
         private void PopulateFields()
         {
             txtCustomerName.Text = currentCustomer.CustomerName;
-            txtAddressId.Text = currentCustomer.AddressId.ToString();
-            chkActive.Checked = currentCustomer.Active;
+            txtAddress.Text = currentCustomer.Address;
+            txtPostalCode.Text = currentCustomer.PostalCode;
+            txtPhone.Text = currentCustomer.Phone;
+            // The city ComboBox will be set in the Load event.
         }
 
 
-        private void button2_Click(object sender, EventArgs e)
+  
+
+  
+
+        private void UpdateCustomerForm_Load(object sender, EventArgs e)
+        {
+            DataTable dtCities = CityDAO.GetCities();
+            comboBoxCity.DisplayMember = "city";
+            comboBoxCity.ValueMember = "cityId";
+            comboBoxCity.DataSource = dtCities;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             try
             {
-                // Update the customer object with the new values.
                 currentCustomer.CustomerName = txtCustomerName.Text.Trim();
-                currentCustomer.AddressId = int.Parse(txtAddressId.Text.Trim());
-                currentCustomer.Active = chkActive.Checked;
+                currentCustomer.Address = txtAddress.Text.Trim();
+                currentCustomer.CityId = Convert.ToInt32(comboBoxCity.SelectedValue);
+                currentCustomer.PostalCode = txtPostalCode.Text.Trim();
+                currentCustomer.Phone = txtPhone.Text.Trim();
 
                 CustomerManager.UpdateCustomer(currentCustomer);
                 MessageBox.Show("Customer updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

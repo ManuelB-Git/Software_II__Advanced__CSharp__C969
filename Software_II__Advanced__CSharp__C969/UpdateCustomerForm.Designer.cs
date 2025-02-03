@@ -28,104 +28,146 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.txtPostalCode = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.chkActive = new System.Windows.Forms.CheckBox();
-            this.txtAddressId = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtCustomerName = new System.Windows.Forms.TextBox();
+            this.comboBoxCity = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(349, 214);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(201, 20);
+            this.txtPhone.TabIndex = 28;
+            // 
+            // txtPostalCode
+            // 
+            this.txtPostalCode.Location = new System.Drawing.Point(349, 188);
+            this.txtPostalCode.Name = "txtPostalCode";
+            this.txtPostalCode.Size = new System.Drawing.Size(201, 20);
+            this.txtPostalCode.TabIndex = 26;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(475, 240);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "Cancel";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(349, 240);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Save";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(349, 136);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(201, 20);
+            this.txtAddress.TabIndex = 16;
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(349, 110);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Size = new System.Drawing.Size(201, 20);
+            this.txtCustomerName.TabIndex = 15;
+            // 
+            // comboBoxCity
+            // 
+            this.comboBoxCity.FormattingEnabled = true;
+            this.comboBoxCity.Location = new System.Drawing.Point(429, 161);
+            this.comboBoxCity.Name = "comboBoxCity";
+            this.comboBoxCity.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCity.TabIndex = 30;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(265, 214);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 13);
+            this.label6.TabIndex = 34;
+            this.label6.Text = "Phone Number";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(279, 188);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "Postal Code";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(251, 202);
+            this.label2.Location = new System.Drawing.Point(251, 136);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 13);
-            this.label2.TabIndex = 13;
+            this.label2.TabIndex = 32;
             this.label2.Text = "Customer Address";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(261, 176);
+            this.label1.Location = new System.Drawing.Point(261, 110);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 31;
             this.label1.Text = "Customer Name";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(475, 251);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(349, 251);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // chkActive
-            // 
-            this.chkActive.AutoSize = true;
-            this.chkActive.Location = new System.Drawing.Point(349, 228);
-            this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(103, 17);
-            this.chkActive.TabIndex = 9;
-            this.chkActive.Text = "Active Customer";
-            this.chkActive.UseVisualStyleBackColor = true;
-            // 
-            // txtAddressId
-            // 
-            this.txtAddressId.Location = new System.Drawing.Point(349, 202);
-            this.txtAddressId.Name = "txtAddressId";
-            this.txtAddressId.Size = new System.Drawing.Size(201, 20);
-            this.txtAddressId.TabIndex = 8;
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Location = new System.Drawing.Point(349, 176);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(201, 20);
-            this.txtCustomerName.TabIndex = 7;
             // 
             // UpdateCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBoxCity);
+            this.Controls.Add(this.txtPhone);
+            this.Controls.Add(this.txtPostalCode);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.chkActive);
-            this.Controls.Add(this.txtAddressId);
+            this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtCustomerName);
             this.Name = "UpdateCustomerForm";
             this.Text = "UpdateCustomerForm";
+            this.Load += new System.EventHandler(this.UpdateCustomerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.TextBox txtPostalCode;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox chkActive;
-        private System.Windows.Forms.TextBox txtAddressId;
+        private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtCustomerName;
+        private System.Windows.Forms.ComboBox comboBoxCity;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

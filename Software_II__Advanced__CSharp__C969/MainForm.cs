@@ -21,15 +21,10 @@ namespace Software_II__Advanced__CSharp__C969
 
         private void button8_Click(object sender, EventArgs e)
         {
-            this.Hide();
+        
+            Application.Restart();
+        
 
-            using (LoginForm loginForm = new LoginForm())
-            {
-                loginForm.ShowDialog();
-            }
-
-      
-            this.Close();
 
         }
 
@@ -156,20 +151,21 @@ namespace Software_II__Advanced__CSharp__C969
 
             try
             {
-                // Create a Customer object from the selected row.
                 Customer customer = new Customer
                 {
                     CustomerId = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells["customerId"].Value),
                     CustomerName = dataGridView2.SelectedRows[0].Cells["customerName"].Value.ToString(),
-                    AddressId = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells["addressId"].Value),
-                    Active = Convert.ToBoolean(dataGridView2.SelectedRows[0].Cells["active"].Value)
+                    Address = dataGridView2.SelectedRows[0].Cells["address"].Value.ToString(),
+                    PostalCode = dataGridView2.SelectedRows[0].Cells["postalCode"].Value.ToString(),
+                    Phone = dataGridView2.SelectedRows[0].Cells["phone"].Value.ToString(),
+                    CityId = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells["cityId"].Value)
+                    // Optionally, you can also retrieve and store CityName.
                 };
 
                 using (UpdateCustomerForm updateForm = new UpdateCustomerForm(customer))
                 {
                     if (updateForm.ShowDialog() == DialogResult.OK)
                     {
-                        // Refresh the DataGridView after a successful update.
                         dataGridView2.DataSource = CustomerDAO.GetCustomers();
                     }
                 }

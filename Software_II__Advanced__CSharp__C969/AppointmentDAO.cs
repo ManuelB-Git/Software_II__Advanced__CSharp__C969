@@ -73,7 +73,7 @@ namespace Software_II__Advanced__CSharp__C969
                                           string contact, string type, string url, DateTime start, DateTime end,
                                           DateTime createDate, string createdBy)
         {
-            // Validate business hours and overlapping appointments.
+            
             ValidateBusinessHours(start, end);
             ValidateOverlappingAppointments(start, end, customerId);
 
@@ -103,7 +103,7 @@ namespace Software_II__Advanced__CSharp__C969
                                              string location, string contact, string type, string url, DateTime start, DateTime end,
                                              DateTime updateDate, string updatedBy)
         {
-            // Validate business hours and overlapping appointments.
+            
             ValidateBusinessHours(start, end);
             ValidateOverlappingAppointments(start, end, customerId, appointmentId);
 
@@ -143,7 +143,7 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
-        // Validate that the appointment is within business hours (e.g., 8 AM–10 PM local time).
+        
         private static void ValidateBusinessHours(DateTime start, DateTime end)
         {
             TimeSpan businessStart = new TimeSpan(8, 0, 0);
@@ -155,7 +155,7 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
-        // Validate that there are no overlapping appointments for the same customer.
+        
         private static void ValidateOverlappingAppointments(DateTime start, DateTime end, int customerId, int? appointmentId = null)
         {
             using (MySqlConnection conn = DatabaseHelper.GetConnection())

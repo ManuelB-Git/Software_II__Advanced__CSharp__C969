@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="AppointmentManager.cs" />
     <Compile Include="BusinessHoursException.cs" />
+    <Compile Include="CityDAO.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerDAO.cs" />
     <Compile Include="CustomerManager.cs" />
@@ -187,7 +188,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.en.resx" />
     <EmbeddedResource Include="Strings.es.resx" />
+    <EmbeddedResource Include="Strings.fr.resx" />
+    <EmbeddedResource Include="Strings.hi.resx" />
     <EmbeddedResource Include="Strings.resx" />
+    <EmbeddedResource Include="Strings.zh.resx" />
     <EmbeddedResource Include="UpdateAppointmentForm.resx">
       <DependentUpon>UpdateAppointmentForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,9 +10,16 @@ namespace Software_II__Advanced__CSharp__C969
                 throw new ArgumentNullException(nameof(customer));
             if (string.IsNullOrWhiteSpace(customer.CustomerName))
                 throw new ArgumentException("Customer name is required.", nameof(customer.CustomerName));
+            if (string.IsNullOrWhiteSpace(customer.Address))
+                throw new ArgumentException("Address is required.", nameof(customer.Address));
+            if (customer.CityId <= 0)
+                throw new ArgumentException("A valid city must be selected.", nameof(customer.CityId));
+            if (string.IsNullOrWhiteSpace(customer.PostalCode))
+                throw new ArgumentException("Postal Code is required.", nameof(customer.PostalCode));
+            if (string.IsNullOrWhiteSpace(customer.Phone))
+                throw new ArgumentException("Phone number is required.", nameof(customer.Phone));
 
-            DateTime now = DateTime.Now;
-            CustomerDAO.AddCustomer(customer.CustomerName, customer.AddressId, customer.Active, now, "test");
+            CustomerDAO.AddCustomer(customer);
         }
 
         public static void UpdateCustomer(Customer customer)
@@ -22,8 +29,7 @@ namespace Software_II__Advanced__CSharp__C969
             if (customer.CustomerId <= 0)
                 throw new ArgumentException("Invalid CustomerId.", nameof(customer.CustomerId));
 
-            DateTime now = DateTime.Now;
-            CustomerDAO.UpdateCustomer(customer.CustomerId, customer.CustomerName, customer.AddressId, customer.Active, now, "test");
+            CustomerDAO.UpdateCustomer(customer);
         }
 
         public static void DeleteCustomer(int customerId)

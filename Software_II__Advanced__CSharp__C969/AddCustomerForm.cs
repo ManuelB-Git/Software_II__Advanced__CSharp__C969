@@ -26,19 +26,17 @@ namespace Software_II__Advanced__CSharp__C969
         {
             try
             {
-                // Create a new Customer object from the input controls.
                 Customer newCustomer = new Customer
                 {
                     CustomerName = txtCustomerName.Text.Trim(),
-                    AddressId = int.Parse(txtAddressId.Text.Trim()),
-                    Active = chkActive.Checked
+                    Address = txtAddress.Text.Trim(),
+                    CityId = Convert.ToInt32(comboBoxCity.SelectedValue),
+                    PostalCode = txtPostalCode.Text.Trim(),
+                    Phone = txtPhone.Text.Trim()
                 };
 
-                // Call the manager to add the customer.
                 CustomerManager.AddCustomer(newCustomer);
                 MessageBox.Show("Customer added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Indicate success and close the form.
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -46,6 +44,15 @@ namespace Software_II__Advanced__CSharp__C969
             {
                 MessageBox.Show("Error adding customer: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void AddCustomerForm_Load(object sender, EventArgs e)
+        {
+            // Populate the city ComboBox.
+            DataTable dtCities = CityDAO.GetCities();
+            comboBoxCity.DisplayMember = "city";      // Display the city name.
+            comboBoxCity.ValueMember = "cityId";        // Use cityId as the value.
+            comboBoxCity.DataSource = dtCities;
         }
     }
 }

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 namespace Software_II__Advanced__CSharp__C969
@@ -19,7 +13,9 @@ namespace Software_II__Advanced__CSharp__C969
         public LoginForm()
         {
             InitializeComponent();
-            
+            labelDisplayUserLanguage.Text = CultureInfo.CurrentUICulture.DisplayName;
+
+
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -37,6 +33,7 @@ namespace Software_II__Advanced__CSharp__C969
             }
             else
             {
+
 
                 string errorMessage = resManager.GetString("loginInvalid", CultureInfo.CurrentUICulture);
                 MessageBox.Show(errorMessage, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
