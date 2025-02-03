@@ -17,5 +17,6 @@ namespace Software_II__Advanced__CSharp__C969
         public DateTime End { get; set; }        
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
+        public object CustomerName { get; internal set; }
     }
 }

@@ -1,23 +1,89 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Software_II__Advanced__CSharp__C969
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private LiveClock _liveClock;
+
+        public int CurrentUserId { get; set; }
+
+        private HashSet<int> remindedAppointmentIds = new HashSet<int>();
+
+        private Timer reminderTimer;
+
+        public MainForm(int currentUserId)
         {
             InitializeComponent();
             dataGridView1.DataSource = AppointmentDAO.GetAppointments();
+            dataGridView1.CellFormatting += dataGridViewAppointments_CellFormatting;
+
             dataGridView2.DataSource = CustomerDAO.GetCustomers();
+
+            _liveClock = new LiveClock(lblClock);
+            _liveClock.Start();
+
+            CurrentUserId = currentUserId;
+
+            reminderTimer = new Timer();
+            reminderTimer.Interval = 60000;
+            reminderTimer.Tick += ReminderTimer_Tick;
+            ReminderTimer_Tick(null, EventArgs.Empty);
+            reminderTimer.Start();
+
+
+
+
         }
 
-        
+        private void ReminderTimer_Tick(object sender, EventArgs e)
+        {
+            DateTime nowUtc = DateTime.UtcNow;
+            DateTime reminderThresholdUtc = nowUtc.AddMinutes(15);
+
+            var appointments = AppointmentDAO.GetAppointmentsListForUser(CurrentUserId);
+
+            foreach (var appt in appointments)
+            {
+           
+                if (appt.Start >= nowUtc && appt.Start <= reminderThresholdUtc)
+                {
+                    if (!remindedAppointmentIds.Contains(appt.AppointmentId))
+                    {
+                        DateTime localStart = TimeZoneInfo.ConvertTimeFromUtc(appt.Start, TimeZoneInfo.Local);
+                        string message = $"Reminder: You have an appointment \"{appt.Title}\" scheduled at {localStart.ToString("hh:mm tt")}.";
+                        MessageBox.Show(message, "Appointment Reminder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        remindedAppointmentIds.Add(appt.AppointmentId);
+                    }
+                }
+            }
+        }
+
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
 
         }
+
+        private void dataGridViewAppointments_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if ((dataGridView1.Columns[e.ColumnIndex].Name == "start" ||
+                 dataGridView1.Columns[e.ColumnIndex].Name == "end") && e.Value != null)
+            {
+                if (e.Value is DateTime utcDateTime)
+                {
+                    DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, TimeZoneInfo.Local);
+                    e.Value = localTime.ToString("g"); 
+                    e.FormattingApplied = true;
+                }
+            }
+        }
+
+
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -48,12 +114,10 @@ namespace Software_II__Advanced__CSharp__C969
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Open the AddAppointmentForm as a modal dialog.
             using (AddAppointmentForm addForm = new AddAppointmentForm())
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
-                    // Refresh the DataGridView after a successful addition.
                     dataGridView1.DataSource = AppointmentDAO.GetAppointments();
                 }
             }
@@ -61,7 +125,6 @@ namespace Software_II__Advanced__CSharp__C969
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // Ensure that a row is selected.
             if (dataGridView1.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select an appointment to update.");
@@ -70,7 +133,6 @@ namespace Software_II__Advanced__CSharp__C969
 
             try
             {
-                // Build an Appointment object from the selected row.
                 Appointment appointment = new Appointment
                 {
                     AppointmentId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["appointmentId"].Value),
@@ -82,17 +144,14 @@ namespace Software_II__Advanced__CSharp__C969
                     Contact = dataGridView1.SelectedRows[0].Cells["contact"].Value.ToString(),
                     Type = dataGridView1.SelectedRows[0].Cells["type"].Value.ToString(),
                     Url = dataGridView1.SelectedRows[0].Cells["url"].Value.ToString(),
-                    // Assuming stored values are in UTC.
                     Start = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells["start"].Value),
                     End = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells["end"].Value)
                 };
 
-                // Open the UpdateAppointmentForm, passing the appointment to update.
                 using (UpdateAppointmentForm updateForm = new UpdateAppointmentForm(appointment))
                 {
                     if (updateForm.ShowDialog() == DialogResult.OK)
                     {
-                        // Refresh the DataGridView after a successful update.
                         dataGridView1.DataSource = AppointmentDAO.GetAppointments();
                     }
                 }
@@ -135,7 +194,6 @@ namespace Software_II__Advanced__CSharp__C969
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
-                    // Refresh the DataGridView after a successful add.
                     dataGridView2.DataSource = CustomerDAO.GetCustomers();
                 }
             }
@@ -159,7 +217,6 @@ namespace Software_II__Advanced__CSharp__C969
                     PostalCode = dataGridView2.SelectedRows[0].Cells["postalCode"].Value.ToString(),
                     Phone = dataGridView2.SelectedRows[0].Cells["phone"].Value.ToString(),
                     CityId = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells["cityId"].Value)
-                    // Optionally, you can also retrieve and store CityName.
                 };
 
                 using (UpdateCustomerForm updateForm = new UpdateCustomerForm(customer))

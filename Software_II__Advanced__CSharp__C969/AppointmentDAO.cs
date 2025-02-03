@@ -69,6 +69,43 @@ namespace Software_II__Advanced__CSharp__C969
             return dt;
         }
 
+
+        public static List<Appointment> GetAppointmentsListForUser(int userId)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+
+            using (MySqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                string query = "SELECT * FROM appointment WHERE userId = @userId";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@userId", userId);
+                conn.Open();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Appointment appt = new Appointment
+                        {
+                            AppointmentId = reader.GetInt32("appointmentId"),
+                            CustomerId = reader.GetInt32("customerId"),
+                            UserId = reader.GetInt32("userId"),
+                            Title = reader.GetString("title"),
+                            Description = reader.GetString("description"),
+                            Location = reader.GetString("location"),
+                            Contact = reader.GetString("contact"),
+                            Type = reader.GetString("type"),
+                            Url = reader.GetString("url"),
+                            Start = reader.GetDateTime("start"),
+                            End = reader.GetDateTime("end")
+                        };
+                        appointments.Add(appt);
+                    }
+                }
+            }
+            return appointments;
+        }
+
         public static void AddAppointment(int customerId, int userId, string title, string description, string location,
                                           string contact, string type, string url, DateTime start, DateTime end,
                                           DateTime createDate, string createdBy)
@@ -123,8 +160,9 @@ namespace Software_II__Advanced__CSharp__C969
                 cmd.Parameters.AddWithValue("@url", url);
                 cmd.Parameters.AddWithValue("@start", start);
                 cmd.Parameters.AddWithValue("@end", end);
-                cmd.Parameters.AddWithValue("@updateDate", updateDate);
-                cmd.Parameters.AddWithValue("@updatedBy", updatedBy);
+
+                cmd.Parameters.AddWithValue("@updateDate", DateTime.UtcNow);
+                cmd.Parameters.AddWithValue("@updatedBy", DateTime.UtcNow);
                 cmd.Parameters.AddWithValue("@appointmentId", appointmentId);
                 conn.Open();
                 cmd.ExecuteNonQuery();

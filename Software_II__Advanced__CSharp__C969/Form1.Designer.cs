@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.labelDisplayUserLanguage = new System.Windows.Forms.Label();
+            this.lblClock = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtUsername
@@ -119,11 +120,21 @@
             this.labelDisplayUserLanguage.TabIndex = 8;
             this.labelDisplayUserLanguage.Text = "label5";
             // 
+            // lblClock
+            // 
+            this.lblClock.AutoSize = true;
+            this.lblClock.Location = new System.Drawing.Point(294, 319);
+            this.lblClock.Name = "lblClock";
+            this.lblClock.Size = new System.Drawing.Size(34, 13);
+            this.lblClock.TabIndex = 23;
+            this.lblClock.Text = "Clock";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.lblClock);
             this.Controls.Add(this.labelDisplayUserLanguage);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -153,6 +164,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelDisplayUserLanguage;
+        private System.Windows.Forms.Label lblClock;
     }
 }
 

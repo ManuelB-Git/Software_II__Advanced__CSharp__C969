@@ -43,6 +43,7 @@
             this.btnDefault = new System.Windows.Forms.Button();
             this.btnWeek = new System.Windows.Forms.Button();
             this.btnMonth = new System.Windows.Forms.Button();
+            this.lblClock = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -197,11 +198,21 @@
             this.btnMonth.UseVisualStyleBackColor = true;
             this.btnMonth.Click += new System.EventHandler(this.btnMonth_Click);
             // 
+            // lblClock
+            // 
+            this.lblClock.AutoSize = true;
+            this.lblClock.Location = new System.Drawing.Point(981, 547);
+            this.lblClock.Name = "lblClock";
+            this.lblClock.Size = new System.Drawing.Size(34, 13);
+            this.lblClock.TabIndex = 22;
+            this.lblClock.Text = "Clock";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 594);
+            this.Controls.Add(this.lblClock);
             this.Controls.Add(this.btnMonth);
             this.Controls.Add(this.btnWeek);
             this.Controls.Add(this.btnDefault);
@@ -244,5 +255,6 @@
         private System.Windows.Forms.Button btnDefault;
         private System.Windows.Forms.Button btnWeek;
         private System.Windows.Forms.Button btnMonth;
+        private System.Windows.Forms.Label lblClock;
     }
 }

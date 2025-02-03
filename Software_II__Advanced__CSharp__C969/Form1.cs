@@ -9,11 +9,16 @@ namespace Software_II__Advanced__CSharp__C969
     public partial class LoginForm : Form
     {
         ResourceManager resManager = new ResourceManager("Software_II__Advanced__CSharp__C969.Strings", typeof(LoginForm).Assembly);
+        private LiveClock _liveClock;
+
 
         public LoginForm()
         {
             InitializeComponent();
             labelDisplayUserLanguage.Text = CultureInfo.CurrentUICulture.DisplayName;
+
+            _liveClock = new LiveClock(lblClock);
+            _liveClock.Start();
 
 
         }
@@ -27,14 +32,13 @@ namespace Software_II__Advanced__CSharp__C969
             {
                 UserActivityLogger.LogLogin(DateTime.Now);
 
-                MainForm mainForm = new MainForm();
+                int currentUserId = 1; 
+                MainForm mainForm = new MainForm(currentUserId);
                 mainForm.Show();
                 this.Hide();
             }
             else
             {
-
-
                 string errorMessage = resManager.GetString("loginInvalid", CultureInfo.CurrentUICulture);
                 MessageBox.Show(errorMessage, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

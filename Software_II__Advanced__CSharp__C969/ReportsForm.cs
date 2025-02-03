@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Software_II__Advanced__CSharp__C969
@@ -21,16 +18,15 @@ namespace Software_II__Advanced__CSharp__C969
         {
             List<Appointment> appointments = AppointmentDAO.GetAppointmentsList();
 
-            // Group by Month (from Start) and Type.
             var report1 = appointments
                 .GroupBy(a => new { Month = a.Start.Month, a.Type })
                 .Select(g => new
                 {
-                    Month = g.Key.Month,
+                    Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(g.Key.Month),
                     AppointmentType = g.Key.Type,
                     Count = g.Count()
                 })
-                .OrderBy(r => r.Month)
+                .OrderBy(r => DateTime.ParseExact(r.Month, "MMMM", CultureInfo.CurrentCulture))
                 .ThenBy(r => r.AppointmentType)
                 .ToList();
 
@@ -41,15 +37,13 @@ namespace Software_II__Advanced__CSharp__C969
         {
             List<Appointment> appointments = AppointmentDAO.GetAppointmentsList();
 
-            // Group by consultant (user id).  
-            // In a real scenario, you might join with a Users table to get a friendly name.
             var report2 = appointments
                 .GroupBy(a => a.UserId)
                 .Select(g => new
                 {
                     Consultant = g.Key,
-                    // Create a summary string of each appointment’s title and local start time.
-                    Schedule = string.Join("; ", g.Select(a => a.Title + " at " +
+                    Schedule = string.Join("; ", g.Select(a =>
+                                         a.Title + " at " +
                                          TimeZoneInfo.ConvertTimeFromUtc(a.Start, TimeZoneInfo.Local).ToString("g")))
                 })
                 .ToList();
@@ -61,11 +55,16 @@ namespace Software_II__Advanced__CSharp__C969
         {
             List<Appointment> appointments = AppointmentDAO.GetAppointmentsList();
 
+            DataTable dtCustomers = CustomerDAO.GetCustomers();
+            Dictionary<int, string> customerNames = dtCustomers.AsEnumerable()
+                .ToDictionary(row => row.Field<int>("customerId"), row => row.Field<string>("customerName"));
+
             var report3 = appointments
                 .GroupBy(a => a.CustomerId)
                 .Select(g => new
                 {
                     CustomerId = g.Key,
+                    CustomerName = customerNames.ContainsKey(g.Key) ? customerNames[g.Key] : "Unknown",
                     TotalAppointments = g.Count()
                 })
                 .ToList();

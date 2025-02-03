@@ -24,7 +24,6 @@ namespace Software_II__Advanced__CSharp__C969
             {
                 // Retrieve values from your input controls.
                 int customerId = int.Parse(txtCustomerId.Text.Trim());
-                int userId = 1; // Use the logged-in user's id.
                // string title = txtTitle.Text.Trim();
                // string description = txtDescription.Text.Trim();
                // string location = txtLocation.Text.Trim();
@@ -34,7 +33,6 @@ namespace Software_II__Advanced__CSharp__C969
                // DateTime start = dateTimePickerStart.Value.ToUniversalTime(); // Store in UTC
                // DateTime end = dateTimePickerEnd.Value.ToUniversalTime();
                 DateTime now = DateTime.UtcNow;
-                string createdBy = "test"; // or the logged-in user
 
                 //AppointmentDAO.AddAppointment(customerId, userId, title, description, location, contact, type, url, start, end, now, createdBy);
                 LoadAppointments();

@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtCustomerId = new System.Windows.Forms.TextBox();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtLocation = new System.Windows.Forms.TextBox();
             this.txtContact = new System.Windows.Forms.TextBox();
             this.txtType = new System.Windows.Forms.TextBox();
             this.txtUrl = new System.Windows.Forms.TextBox();
-            this.dtpStart = new System.Windows.Forms.DateTimePicker();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,15 +45,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.comboBoxCustomer = new System.Windows.Forms.ComboBox();
+            this.comboBoxStartTime = new System.Windows.Forms.ComboBox();
+            this.comboBoxEndTime = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // txtCustomerId
-            // 
-            this.txtCustomerId.Location = new System.Drawing.Point(180, 155);
-            this.txtCustomerId.Name = "txtCustomerId";
-            this.txtCustomerId.Size = new System.Drawing.Size(209, 20);
-            this.txtCustomerId.TabIndex = 0;
             // 
             // txtTitle
             // 
@@ -94,28 +87,21 @@
             // 
             // txtUrl
             // 
-            this.txtUrl.Location = new System.Drawing.Point(180, 311);
+            this.txtUrl.Location = new System.Drawing.Point(180, 308);
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(209, 20);
             this.txtUrl.TabIndex = 6;
             // 
-            // dtpStart
+            // dtpDate
             // 
-            this.dtpStart.Location = new System.Drawing.Point(189, 337);
-            this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(200, 20);
-            this.dtpStart.TabIndex = 7;
-            // 
-            // dtpEnd
-            // 
-            this.dtpEnd.Location = new System.Drawing.Point(189, 363);
-            this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(200, 20);
-            this.dtpEnd.TabIndex = 8;
+            this.dtpDate.Location = new System.Drawing.Point(189, 445);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpDate.TabIndex = 7;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(189, 389);
+            this.btnSave.Location = new System.Drawing.Point(180, 566);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 9;
@@ -125,7 +111,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(314, 389);
+            this.btnCancel.Location = new System.Drawing.Point(305, 566);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 10;
@@ -199,27 +185,44 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(142, 337);
+            this.label8.Location = new System.Drawing.Point(142, 445);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(32, 13);
             this.label8.TabIndex = 18;
             this.label8.Text = "Start ";
             // 
-            // label9
+            // comboBoxCustomer
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(145, 363);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(29, 13);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "End ";
+            this.comboBoxCustomer.FormattingEnabled = true;
+            this.comboBoxCustomer.Location = new System.Drawing.Point(268, 155);
+            this.comboBoxCustomer.Name = "comboBoxCustomer";
+            this.comboBoxCustomer.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCustomer.TabIndex = 20;
+            // 
+            // comboBoxStartTime
+            // 
+            this.comboBoxStartTime.FormattingEnabled = true;
+            this.comboBoxStartTime.Location = new System.Drawing.Point(268, 471);
+            this.comboBoxStartTime.Name = "comboBoxStartTime";
+            this.comboBoxStartTime.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxStartTime.TabIndex = 21;
+            // 
+            // comboBoxEndTime
+            // 
+            this.comboBoxEndTime.FormattingEnabled = true;
+            this.comboBoxEndTime.Location = new System.Drawing.Point(268, 498);
+            this.comboBoxEndTime.Name = "comboBoxEndTime";
+            this.comboBoxEndTime.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxEndTime.TabIndex = 22;
             // 
             // AddAppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(530, 745);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.comboBoxEndTime);
+            this.Controls.Add(this.comboBoxStartTime);
+            this.Controls.Add(this.comboBoxCustomer);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -230,33 +233,29 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.dtpEnd);
-            this.Controls.Add(this.dtpStart);
+            this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.txtUrl);
             this.Controls.Add(this.txtType);
             this.Controls.Add(this.txtContact);
             this.Controls.Add(this.txtLocation);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtTitle);
-            this.Controls.Add(this.txtCustomerId);
             this.Name = "AddAppointmentForm";
             this.Text = "AddAppointmentForm";
+            this.Load += new System.EventHandler(this.AddAppointmentForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtCustomerId;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.TextBox txtLocation;
         private System.Windows.Forms.TextBox txtContact;
         private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.TextBox txtUrl;
-        private System.Windows.Forms.DateTimePicker dtpStart;
-        private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
@@ -267,6 +266,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBoxCustomer;
+        private System.Windows.Forms.ComboBox comboBoxStartTime;
+        private System.Windows.Forms.ComboBox comboBoxEndTime;
     }
 }
