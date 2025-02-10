@@ -82,13 +82,13 @@ namespace Software_II__Advanced__CSharp__C969
             // Define Eastern Timezone
             TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
 
-            // Create business hours in Eastern Time (without converting yet)
-            DateTime estStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 9, 0, 0); // 9:00 AM EST
-            DateTime estEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 17, 0, 0); // 5:00 PM EST
+            // Create business hours in Eastern Time (in UTC)
+            DateTime estStartUtc = TimeZoneInfo.ConvertTimeToUtc(new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, 9, 0, 0), estZone);
+            DateTime estEndUtc = TimeZoneInfo.ConvertTimeToUtc(new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, 17, 0, 0), estZone);
 
-            // Convert these times to the user's local time zone
-            DateTime localStart = TimeZoneInfo.ConvertTimeFromUtc(TimeZoneInfo.ConvertTimeToUtc(estStart, estZone), TimeZoneInfo.Local);
-            DateTime localEnd = TimeZoneInfo.ConvertTimeFromUtc(TimeZoneInfo.ConvertTimeToUtc(estEnd, estZone), TimeZoneInfo.Local);
+            // Convert these UTC times to the user's local time zone
+            DateTime localStart = TimeZoneInfo.ConvertTimeFromUtc(estStartUtc, TimeZoneInfo.Local);
+            DateTime localEnd = TimeZoneInfo.ConvertTimeFromUtc(estEndUtc, TimeZoneInfo.Local);
 
             // Populate dropdown with 15-minute increments
             DateTime time = localStart;
@@ -101,6 +101,7 @@ namespace Software_II__Advanced__CSharp__C969
             if (combo.Items.Count > 0)
                 combo.SelectedIndex = 0;
         }
+
 
 
         private void UpdateAppointmentForm_Load(object sender, EventArgs e)
