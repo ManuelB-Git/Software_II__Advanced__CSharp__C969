@@ -63,9 +63,9 @@ namespace Software_II__Advanced__CSharp__C969
             {
                 UserActivityLogger.LogLogin(userName, DateTime.UtcNow);
 
-                MainForm mainForm = new MainForm(userId);
+                MainForm mainForm = new MainForm(userId, this);
                 mainForm.Show();
-                this.Hide();
+                Hide();
             }
             else
             {

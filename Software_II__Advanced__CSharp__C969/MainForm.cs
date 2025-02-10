@@ -1,9 +1,8 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
+
 
 namespace Software_II__Advanced__CSharp__C969
 {
@@ -17,8 +16,12 @@ namespace Software_II__Advanced__CSharp__C969
 
         private Timer reminderTimer;
 
-        public MainForm(int currentUserId)
+        private LoginForm loginForm;
+
+        public MainForm(int currentUserId, LoginForm loginForm)
         {
+            this.loginForm = loginForm;
+
             InitializeComponent();
             dataGridView1.DataSource = AppointmentDAO.GetAppointments();
             dataGridView1.CellFormatting += dataGridViewAppointments_CellFormatting;
@@ -88,10 +91,13 @@ namespace Software_II__Advanced__CSharp__C969
 
 
 
+
         private void button8_Click(object sender, EventArgs e)
         {
-        
+
+           
             this.Close();
+
 
 
 
@@ -270,15 +276,19 @@ namespace Software_II__Advanced__CSharp__C969
 
         private void MonthCalendar_DateSelected_DateChanged(object sender, DateRangeEventArgs e)
         {
-            DateTime selectedDate = e.Start.Date; // Get selected date without time
+            DateTime selectedDate = e.Start.Date; 
 
-            // Use the new method to fetch appointments for the selected day
             DataTable appointments = AppointmentFilter.GetAppointmentsForDay(selectedDate);
 
             dataGridView1.DataSource = appointments;
         }
 
-       
-
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                loginForm.Show();
+            }
+        }
     }
 }
