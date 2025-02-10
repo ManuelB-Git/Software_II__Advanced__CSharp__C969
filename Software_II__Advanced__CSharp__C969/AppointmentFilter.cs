@@ -4,10 +4,9 @@ using System.Data;
 
 namespace Software_II__Advanced__CSharp__C969
 {
-    // This class provides methods to filter appointments based on the current week or month.
     public static class AppointmentFilter
     {
-        // This method retrieves appointments for the current week.
+        // Retrieves appointments for the current week.
         public static DataTable GetAppointmentsForCurrentWeek()
         {
             DateTime todayUtc = DateTime.UtcNow;
@@ -18,7 +17,7 @@ namespace Software_II__Advanced__CSharp__C969
             return GetAppointmentsInRange(weekStart, weekEnd);
         }
 
-        // This method retrieves appointments for the current month.
+        // Retrieves appointments for the current month.
         public static DataTable GetAppointmentsForCurrentMonth()
         {
             DateTime todayUtc = DateTime.UtcNow;
@@ -28,7 +27,17 @@ namespace Software_II__Advanced__CSharp__C969
             return GetAppointmentsInRange(monthStart, monthEnd);
         }
 
-        // This method retrieves appointments within a specified date range.
+        // ✅ NEW: Retrieves appointments for a selected day
+        public static DataTable GetAppointmentsForDay(DateTime selectedDate)
+        {
+            // Ensure only the date is used (ignore time)
+            DateTime start = selectedDate.Date;
+            DateTime end = start.AddDays(1).AddSeconds(-1);
+
+            return GetAppointmentsInRange(start, end);
+        }
+
+        // Retrieves appointments within a specified date range.
         private static DataTable GetAppointmentsInRange(DateTime start, DateTime end)
         {
             DataTable dt = new DataTable();

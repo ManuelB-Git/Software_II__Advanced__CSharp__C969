@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Software_II__Advanced__CSharp__C969
@@ -264,5 +267,18 @@ namespace Software_II__Advanced__CSharp__C969
                 rptForm.ShowDialog();
             }
         }
+
+        private void MonthCalendar_DateSelected_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            DateTime selectedDate = e.Start.Date; // Get selected date without time
+
+            // Use the new method to fetch appointments for the selected day
+            DataTable appointments = AppointmentFilter.GetAppointmentsForDay(selectedDate);
+
+            dataGridView1.DataSource = appointments;
+        }
+
+       
+
     }
 }
