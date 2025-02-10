@@ -38,27 +38,31 @@
             this.label4 = new System.Windows.Forms.Label();
             this.labelDisplayUserLanguage = new System.Windows.Forms.Label();
             this.lblClock = new System.Windows.Forms.Label();
+            this.lblLocation = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(173, 157);
+            this.txtUsername.Location = new System.Drawing.Point(260, 242);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(156, 20);
+            this.txtUsername.Size = new System.Drawing.Size(232, 26);
             this.txtUsername.TabIndex = 0;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(173, 183);
+            this.txtPassword.Location = new System.Drawing.Point(260, 282);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(156, 20);
+            this.txtPassword.Size = new System.Drawing.Size(232, 26);
             this.txtPassword.TabIndex = 1;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(173, 219);
+            this.btnLogin.Location = new System.Drawing.Point(260, 337);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Size = new System.Drawing.Size(112, 35);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -66,9 +70,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(254, 219);
+            this.button1.Location = new System.Drawing.Point(381, 337);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(112, 35);
             this.button1.TabIndex = 3;
             this.button1.Text = "Exit";
             this.button1.UseVisualStyleBackColor = true;
@@ -78,62 +83,78 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(215, 87);
+            this.label1.Location = new System.Drawing.Point(322, 134);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 25);
+            this.label1.Size = new System.Drawing.Size(96, 37);
             this.label1.TabIndex = 4;
             this.label1.Text = "Login";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(106, 157);
+            this.label2.Location = new System.Drawing.Point(159, 242);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.Size = new System.Drawing.Size(91, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Username: ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(108, 183);
+            this.label3.Location = new System.Drawing.Point(162, 282);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.Size = new System.Drawing.Size(86, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "Password: ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(170, 281);
+            this.label4.Location = new System.Drawing.Point(255, 432);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 13);
+            this.label4.Size = new System.Drawing.Size(119, 20);
             this.label4.TabIndex = 7;
             this.label4.Text = "User Language";
             // 
             // labelDisplayUserLanguage
             // 
             this.labelDisplayUserLanguage.AutoSize = true;
-            this.labelDisplayUserLanguage.Location = new System.Drawing.Point(294, 281);
+            this.labelDisplayUserLanguage.Location = new System.Drawing.Point(441, 432);
+            this.labelDisplayUserLanguage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDisplayUserLanguage.Name = "labelDisplayUserLanguage";
-            this.labelDisplayUserLanguage.Size = new System.Drawing.Size(35, 13);
+            this.labelDisplayUserLanguage.Size = new System.Drawing.Size(51, 20);
             this.labelDisplayUserLanguage.TabIndex = 8;
             this.labelDisplayUserLanguage.Text = "label5";
             // 
             // lblClock
             // 
             this.lblClock.AutoSize = true;
-            this.lblClock.Location = new System.Drawing.Point(294, 319);
+            this.lblClock.Location = new System.Drawing.Point(441, 491);
+            this.lblClock.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClock.Name = "lblClock";
-            this.lblClock.Size = new System.Drawing.Size(34, 13);
+            this.lblClock.Size = new System.Drawing.Size(48, 20);
             this.lblClock.TabIndex = 23;
             this.lblClock.Text = "Clock";
             // 
+            // lblLocation
+            // 
+            this.lblLocation.AutoSize = true;
+            this.lblLocation.Location = new System.Drawing.Point(256, 491);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(70, 20);
+            this.lblLocation.TabIndex = 24;
+            this.lblLocation.Text = "Location";
+            // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 461);
+            this.ClientSize = new System.Drawing.Size(717, 683);
+            this.Controls.Add(this.lblLocation);
             this.Controls.Add(this.lblClock);
             this.Controls.Add(this.labelDisplayUserLanguage);
             this.Controls.Add(this.label4);
@@ -144,8 +165,9 @@
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
-            this.MaximumSize = new System.Drawing.Size(500, 500);
-            this.MinimumSize = new System.Drawing.Size(500, 500);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximumSize = new System.Drawing.Size(739, 739);
+            this.MinimumSize = new System.Drawing.Size(739, 739);
             this.Name = "LoginForm";
             this.Text = "Login";
             this.ResumeLayout(false);
@@ -165,6 +187,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelDisplayUserLanguage;
         private System.Windows.Forms.Label lblClock;
+        private System.Windows.Forms.Label lblLocation;
     }
 }
 

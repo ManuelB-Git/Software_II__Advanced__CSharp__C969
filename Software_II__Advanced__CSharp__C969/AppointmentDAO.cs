@@ -190,14 +190,28 @@ namespace Software_II__Advanced__CSharp__C969
         // Validates that the appointment is within business hours
         private static void ValidateBusinessHours(DateTime start, DateTime end)
         {
-            TimeSpan businessStart = new TimeSpan(8, 0, 0);
-            TimeSpan businessEnd = new TimeSpan(22, 0, 0);
+            // Define business hours: 9:00 AM - 5:00 PM (EST)
+            TimeSpan businessStart = new TimeSpan(9, 0, 0); // 9:00 AM
+            TimeSpan businessEnd = new TimeSpan(17, 0, 0); // 5:00 PM
 
-            if (start.TimeOfDay < businessStart || end.TimeOfDay > businessEnd)
+            // Convert UTC time to Eastern Standard Time (EST)
+            TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            DateTime startEst = TimeZoneInfo.ConvertTimeFromUtc(start, estZone);
+            DateTime endEst = TimeZoneInfo.ConvertTimeFromUtc(end, estZone);
+
+            // Ensure the appointment is on a weekday (Monday-Friday)
+            if (startEst.DayOfWeek == DayOfWeek.Saturday || startEst.DayOfWeek == DayOfWeek.Sunday)
             {
-                throw new BusinessHoursException("Appointment is outside of business hours.");
+                throw new BusinessHoursException("Appointments can only be scheduled Monday to Friday.");
+            }
+
+            // Check if appointment falls within business hours
+            if (startEst.TimeOfDay < businessStart || endEst.TimeOfDay > businessEnd)
+            {
+                throw new BusinessHoursException("Appointments must be scheduled between 9:00 AM and 5:00 PM EST.");
             }
         }
+
 
         // Validates that the appointment does not overlap with existing appointments
         private static void ValidateOverlappingAppointments(DateTime start, DateTime end, int customerId, int? appointmentId = null)

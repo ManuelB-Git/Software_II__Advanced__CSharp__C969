@@ -16,6 +16,7 @@ namespace Software_II__Advanced__CSharp__C969
         {
             InitializeComponent();
             labelDisplayUserLanguage.Text = CultureInfo.CurrentUICulture.DisplayName;
+            lblLocation.Text = CultureInfo.CurrentCulture.DisplayName;
 
             _liveClock = new LiveClock(lblClock);
             _liveClock.Start();

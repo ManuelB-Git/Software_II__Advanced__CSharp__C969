@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -43,24 +44,40 @@ namespace Software_II__Advanced__CSharp__C969
         {
             List<Appointment> appointments = AppointmentDAO.GetAppointmentsList();
 
-            var report2 = appointments
-                //Lambda expression
-                // Group appointments by user ID
-                .GroupBy(a => a.UserId)
-                // Project each group into a new anonymous type
-                .Select(g => new
+            // Fetch user names from the database
+            Dictionary<int, string> userNames = new Dictionary<int, string>();
+            using (MySqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                string query = "SELECT userId, userName FROM user";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                conn.Open();
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    Consultant = g.Key,
-                    //Lambda expression
-                    // Create a schedule string for each appointment
-                    Schedule = string.Join("; ", g.Select(a =>
-                                         a.Title + " at " +
-                                         TimeZoneInfo.ConvertTimeFromUtc(a.Start, TimeZoneInfo.Local).ToString("g")))
+                    while (reader.Read())
+                    {
+                        int userId = reader.GetInt32("userId");
+                        string userName = reader.GetString("userName");
+                        userNames[userId] = userName;
+                    }
+                }
+            }
+
+            var report2 = appointments
+                .Select(a => new
+                {
+                    // Display consultant name for each appointment
+                    Consultant = userNames.ContainsKey(a.UserId) ? userNames[a.UserId] : "Unknown",
+
+                    // Display each appointment separately
+                    Title = a.Title,
+                    DateTime = TimeZoneInfo.ConvertTimeFromUtc(a.Start, TimeZoneInfo.Local).ToString("g")
                 })
                 .ToList();
 
             dgvReports.DataSource = report2;
         }
+
+
 
         private void btnReport3_Click(object sender, EventArgs e)
         {
