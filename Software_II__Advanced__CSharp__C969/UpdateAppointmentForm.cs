@@ -8,11 +8,13 @@ namespace Software_II__Advanced__CSharp__C969
     public partial class UpdateAppointmentForm : Form
     {
         private Appointment currentAppointment;
+        private int currentUserId;
 
-        public UpdateAppointmentForm(Appointment appointment)
+        public UpdateAppointmentForm(Appointment appointment, int userId)
         {
             InitializeComponent();
             currentAppointment = appointment;
+            currentUserId = userId;
         }
 
 
@@ -21,7 +23,6 @@ namespace Software_II__Advanced__CSharp__C969
             try
             {
                 int customerId = Convert.ToInt32(comboBoxCustomer.SelectedValue);
-
                 string title = txtTitle.Text.Trim();
                 string description = txtDescription.Text.Trim();
                 string location = txtLocation.Text.Trim();
@@ -37,15 +38,20 @@ namespace Software_II__Advanced__CSharp__C969
                 DateTime parsedStartTime = DateTime.ParseExact(startTimeStr, "hh:mm tt", CultureInfo.InvariantCulture);
                 DateTime parsedEndTime = DateTime.ParseExact(endTimeStr, "hh:mm tt", CultureInfo.InvariantCulture);
 
-                DateTime startDateTime = selectedDate.AddHours(parsedStartTime.Hour).AddMinutes(parsedStartTime.Minute);
-                DateTime endDateTime = selectedDate.AddHours(parsedEndTime.Hour).AddMinutes(parsedEndTime.Minute);
+                DateTime startLocal = selectedDate.AddHours(parsedStartTime.Hour).AddMinutes(parsedStartTime.Minute);
+                DateTime endLocal = selectedDate.AddHours(parsedEndTime.Hour).AddMinutes(parsedEndTime.Minute);
 
-                if (endDateTime <= startDateTime)
+                if (endLocal <= startLocal)
                 {
                     MessageBox.Show("End time must be after start time.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
+                // Convert local time to UTC before updating
+                DateTime startUtc = TimeZoneInfo.ConvertTimeToUtc(startLocal, TimeZoneInfo.Local);
+                DateTime endUtc = TimeZoneInfo.ConvertTimeToUtc(endLocal, TimeZoneInfo.Local);
+
+                // Update appointment object
                 currentAppointment.CustomerId = customerId;
                 currentAppointment.Title = title;
                 currentAppointment.Description = description;
@@ -53,8 +59,9 @@ namespace Software_II__Advanced__CSharp__C969
                 currentAppointment.Contact = contact;
                 currentAppointment.Type = type;
                 currentAppointment.Url = url;
-                currentAppointment.Start = startDateTime.ToUniversalTime();
-                currentAppointment.End = endDateTime.ToUniversalTime();
+                currentAppointment.Start = startUtc;
+                currentAppointment.End = endUtc;
+                currentAppointment.UserId = currentUserId; // ✅ Ensure UserId is updated correctly
 
                 AppointmentManager.UpdateAppointment(currentAppointment);
                 MessageBox.Show("Appointment updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -71,16 +78,30 @@ namespace Software_II__Advanced__CSharp__C969
         private void PopulateTimeComboBox(ComboBox combo)
         {
             combo.Items.Clear();
-            DateTime time = DateTime.Today.AddHours(8);  
-            DateTime dtEnd = DateTime.Today.AddHours(22);  
-            while (time <= dtEnd)
+
+            // Define Eastern Timezone
+            TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+
+            // Create business hours in Eastern Time (without converting yet)
+            DateTime estStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 9, 0, 0); // 9:00 AM EST
+            DateTime estEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 17, 0, 0); // 5:00 PM EST
+
+            // Convert these times to the user's local time zone
+            DateTime localStart = TimeZoneInfo.ConvertTimeFromUtc(TimeZoneInfo.ConvertTimeToUtc(estStart, estZone), TimeZoneInfo.Local);
+            DateTime localEnd = TimeZoneInfo.ConvertTimeFromUtc(TimeZoneInfo.ConvertTimeToUtc(estEnd, estZone), TimeZoneInfo.Local);
+
+            // Populate dropdown with 15-minute increments
+            DateTime time = localStart;
+            while (time <= localEnd)
             {
-                combo.Items.Add(time.ToString("hh:mm tt"));
-                time = time.AddMinutes(15);
+                combo.Items.Add(time.ToString("hh:mm tt")); // Display in local time
+                time = time.AddMinutes(15); // Increment by 15 minutes
             }
+
             if (combo.Items.Count > 0)
                 combo.SelectedIndex = 0;
         }
+
 
         private void UpdateAppointmentForm_Load(object sender, EventArgs e)
         {

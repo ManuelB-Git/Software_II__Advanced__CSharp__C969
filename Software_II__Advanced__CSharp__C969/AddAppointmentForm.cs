@@ -1,22 +1,21 @@
-﻿using Mysqlx.Crud;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Software_II__Advanced__CSharp__C969
 {
     public partial class AddAppointmentForm : Form
     {
-        public AddAppointmentForm()
+        private TimeZoneInfo userTimeZone;
+        private int currentUserId;
+
+
+        public AddAppointmentForm(int currentUserId)
         {
             InitializeComponent();
+            userTimeZone = TimeZoneInfo.Local; // Detect user's timezone
+            this.currentUserId = currentUserId;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -29,7 +28,6 @@ namespace Software_II__Advanced__CSharp__C969
             try
             {
                 int customerId = Convert.ToInt32(comboBoxCustomer.SelectedValue);
-
                 string title = txtTitle.Text.Trim();
                 string description = txtDescription.Text.Trim();
                 string location = txtLocation.Text.Trim();
@@ -37,23 +35,30 @@ namespace Software_II__Advanced__CSharp__C969
                 string type = txtType.Text.Trim();
                 string url = txtUrl.Text.Trim();
 
-                DateTime selectedDate = dtpDate.Value.Date; 
+                DateTime selectedDate = dtpDate.Value.Date; // Get selected date (ignoring time)
 
+                // Convert selected time strings to DateTime objects
                 string startTimeStr = comboBoxStartTime.SelectedItem.ToString();
                 string endTimeStr = comboBoxEndTime.SelectedItem.ToString();
 
                 DateTime parsedStartTime = DateTime.ParseExact(startTimeStr, "hh:mm tt", CultureInfo.InvariantCulture);
                 DateTime parsedEndTime = DateTime.ParseExact(endTimeStr, "hh:mm tt", CultureInfo.InvariantCulture);
 
-                DateTime startDateTime = selectedDate.AddHours(parsedStartTime.Hour).AddMinutes(parsedStartTime.Minute);
-                DateTime endDateTime = selectedDate.AddHours(parsedEndTime.Hour).AddMinutes(parsedEndTime.Minute);
+                // Merge date and time
+                DateTime startLocal = selectedDate.AddHours(parsedStartTime.Hour).AddMinutes(parsedStartTime.Minute);
+                DateTime endLocal = selectedDate.AddHours(parsedEndTime.Hour).AddMinutes(parsedEndTime.Minute);
 
-                if (endDateTime <= startDateTime)
+                if (endLocal <= startLocal)
                 {
                     MessageBox.Show("End time must be after start time.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
+                // Convert local time to UTC before saving
+                DateTime startUtc = TimeZoneInfo.ConvertTimeToUtc(startLocal, userTimeZone);
+                DateTime endUtc = TimeZoneInfo.ConvertTimeToUtc(endLocal, userTimeZone);
+
+                // Create appointment object
                 Appointment newAppointment = new Appointment
                 {
                     CustomerId = customerId,
@@ -63,10 +68,10 @@ namespace Software_II__Advanced__CSharp__C969
                     Contact = contact,
                     Type = type,
                     Url = url,
-                    Start = startDateTime.ToUniversalTime(),
-                    End = endDateTime.ToUniversalTime(),
-                    UserId = 1,          
-                    CreatedBy = "test"   
+                    Start = startUtc,
+                    End = endUtc,
+                    UserId = currentUserId,
+                    CreatedBy = "test"
                 };
 
                 AppointmentManager.AddAppointment(newAppointment);
@@ -80,16 +85,30 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
+        // ✅ Modified: Ensures time selection aligns with the user's local timezone
         private void PopulateTimeComboBox(ComboBox combo)
         {
             combo.Items.Clear();
-            DateTime time = DateTime.Today.AddHours(8);  
-            DateTime endTime = DateTime.Today.AddHours(22); 
-            while (time <= endTime)
+
+            // Define Eastern Timezone
+            TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+
+            // Create business hours in Eastern Time (without converting yet)
+            DateTime estStart = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 9, 0, 0); // 9:00 AM EST
+            DateTime estEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 17, 0, 0); // 5:00 PM EST
+
+            // Convert these times to the user's local time zone
+            DateTime localStart = TimeZoneInfo.ConvertTimeFromUtc(TimeZoneInfo.ConvertTimeToUtc(estStart, estZone), TimeZoneInfo.Local);
+            DateTime localEnd = TimeZoneInfo.ConvertTimeFromUtc(TimeZoneInfo.ConvertTimeToUtc(estEnd, estZone), TimeZoneInfo.Local);
+
+            // Populate dropdown with 15-minute increments
+            DateTime time = localStart;
+            while (time <= localEnd)
             {
-                combo.Items.Add(time.ToString("hh:mm tt")); 
-                time = time.AddMinutes(15);
+                combo.Items.Add(time.ToString("hh:mm tt")); // Display in local time
+                time = time.AddMinutes(15); // Increment by 15 minutes
             }
+
             if (combo.Items.Count > 0)
                 combo.SelectedIndex = 0;
         }
@@ -97,11 +116,13 @@ namespace Software_II__Advanced__CSharp__C969
 
         private void AddAppointmentForm_Load(object sender, EventArgs e)
         {
-            DataTable dtCustomers = CustomerDAO.GetCustomers(); 
+            // Populate customer list
+            DataTable dtCustomers = CustomerDAO.GetCustomers();
             comboBoxCustomer.DisplayMember = "customerName";
             comboBoxCustomer.ValueMember = "customerId";
             comboBoxCustomer.DataSource = dtCustomers;
 
+            // Populate time dropdowns
             PopulateTimeComboBox(comboBoxStartTime);
             PopulateTimeComboBox(comboBoxEndTime);
         }

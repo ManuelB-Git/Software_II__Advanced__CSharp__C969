@@ -112,7 +112,7 @@ namespace Software_II__Advanced__CSharp__C969
         // Event handler for add appointment button click
         private void button1_Click(object sender, EventArgs e)
         {
-            using (AddAppointmentForm addForm = new AddAppointmentForm())
+            using (AddAppointmentForm addForm = new AddAppointmentForm(CurrentUserId))
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
@@ -147,7 +147,7 @@ namespace Software_II__Advanced__CSharp__C969
                     End = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells["end"].Value)
                 };
 
-                using (UpdateAppointmentForm updateForm = new UpdateAppointmentForm(appointment))
+                using (UpdateAppointmentForm updateForm = new UpdateAppointmentForm(appointment, CurrentUserId))
                 {
                     if (updateForm.ShowDialog() == DialogResult.OK)
                     {
