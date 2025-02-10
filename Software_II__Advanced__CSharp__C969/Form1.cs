@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Globalization;
 using System.Resources;
 
@@ -29,12 +30,13 @@ namespace Software_II__Advanced__CSharp__C969
             string userName = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            if (userName.Equals("test", StringComparison.OrdinalIgnoreCase) && password == "test")
+            if (ValidateUser(userName, password, out int userId))
             {
-                UserActivityLogger.LogLogin(DateTime.Now);
+                // Log successful login
+                UserActivityLogger.LogLogin(userName, DateTime.UtcNow);
 
-                int currentUserId = 1; 
-                MainForm mainForm = new MainForm(currentUserId);
+                // Open main form and pass the userId
+                MainForm mainForm = new MainForm(userId);
                 mainForm.Show();
                 this.Hide();
             }
@@ -43,6 +45,31 @@ namespace Software_II__Advanced__CSharp__C969
                 string errorMessage = resManager.GetString("loginInvalid", CultureInfo.CurrentUICulture);
                 MessageBox.Show(errorMessage, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool ValidateUser(string userName, string password, out int userId)
+        {
+            userId = -1; // Default to -1 (invalid user)
+            bool isValidUser = false;
+
+            using (MySqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                string query = "SELECT userId FROM user WHERE userName = @userName AND password = @password";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@userName", userName);
+                cmd.Parameters.AddWithValue("@password", password);
+
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    userId = Convert.ToInt32(result);
+                    isValidUser = true;
+                }
+            }
+
+            return isValidUser;
         }
 
         private void button1_Click(object sender, EventArgs e)
