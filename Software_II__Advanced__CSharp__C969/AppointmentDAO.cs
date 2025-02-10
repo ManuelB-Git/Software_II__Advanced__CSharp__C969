@@ -7,6 +7,7 @@ namespace Software_II__Advanced__CSharp__C969
 {
     public static class AppointmentDAO
     {
+        // Retrieves a list of all appointments from the database
         public static List<Appointment> GetAppointmentsList()
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -40,6 +41,8 @@ namespace Software_II__Advanced__CSharp__C969
             }
             return appointments;
         }
+
+        // Retrieves all appointments from the database as a DataTable
         public static DataTable GetAppointments()
         {
             DataTable dt = new DataTable();
@@ -54,6 +57,7 @@ namespace Software_II__Advanced__CSharp__C969
             return dt;
         }
 
+        // Retrieves appointments for a specific user from the database as a DataTable
         public static DataTable GetAppointmentsForUser(int userId)
         {
             DataTable dt = new DataTable();
@@ -69,7 +73,7 @@ namespace Software_II__Advanced__CSharp__C969
             return dt;
         }
 
-
+        // Retrieves a list of appointments for a specific user from the database
         public static List<Appointment> GetAppointmentsListForUser(int userId)
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -106,11 +110,12 @@ namespace Software_II__Advanced__CSharp__C969
             return appointments;
         }
 
+        // Adds a new appointment to the database
         public static void AddAppointment(int customerId, int userId, string title, string description, string location,
                                           string contact, string type, string url, DateTime start, DateTime end,
                                           DateTime createDate, string createdBy)
         {
-            
+            // Validate business hours and overlapping appointments
             ValidateBusinessHours(start, end);
             ValidateOverlappingAppointments(start, end, customerId);
 
@@ -136,11 +141,12 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
+        // Updates an existing appointment in the database
         public static void UpdateAppointment(int appointmentId, int customerId, int userId, string title, string description,
                                              string location, string contact, string type, string url, DateTime start, DateTime end,
                                              DateTime updateDate, string updatedBy)
         {
-            
+            // Validate business hours and overlapping appointments
             ValidateBusinessHours(start, end);
             ValidateOverlappingAppointments(start, end, customerId, appointmentId);
 
@@ -160,7 +166,6 @@ namespace Software_II__Advanced__CSharp__C969
                 cmd.Parameters.AddWithValue("@url", url);
                 cmd.Parameters.AddWithValue("@start", start);
                 cmd.Parameters.AddWithValue("@end", end);
-
                 cmd.Parameters.AddWithValue("@updateDate", DateTime.UtcNow);
                 cmd.Parameters.AddWithValue("@updatedBy", DateTime.UtcNow);
                 cmd.Parameters.AddWithValue("@appointmentId", appointmentId);
@@ -169,6 +174,7 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
+        // Deletes an appointment from the database
         public static void DeleteAppointment(int appointmentId)
         {
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
@@ -181,7 +187,7 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
-        
+        // Validates that the appointment is within business hours
         private static void ValidateBusinessHours(DateTime start, DateTime end)
         {
             TimeSpan businessStart = new TimeSpan(8, 0, 0);
@@ -193,7 +199,7 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
-        
+        // Validates that the appointment does not overlap with existing appointments
         private static void ValidateOverlappingAppointments(DateTime start, DateTime end, int customerId, int? appointmentId = null)
         {
             using (MySqlConnection conn = DatabaseHelper.GetConnection())

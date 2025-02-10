@@ -4,9 +4,10 @@ using System.Data;
 
 namespace Software_II__Advanced__CSharp__C969
 {
+    // This class provides methods to filter appointments based on the current week or month.
     public static class AppointmentFilter
     {
-
+        // This method retrieves appointments for the current week.
         public static DataTable GetAppointmentsForCurrentWeek()
         {
             DateTime todayUtc = DateTime.UtcNow;
@@ -17,7 +18,7 @@ namespace Software_II__Advanced__CSharp__C969
             return GetAppointmentsInRange(weekStart, weekEnd);
         }
 
- 
+        // This method retrieves appointments for the current month.
         public static DataTable GetAppointmentsForCurrentMonth()
         {
             DateTime todayUtc = DateTime.UtcNow;
@@ -27,7 +28,7 @@ namespace Software_II__Advanced__CSharp__C969
             return GetAppointmentsInRange(monthStart, monthEnd);
         }
 
-      
+        // This method retrieves appointments within a specified date range.
         private static DataTable GetAppointmentsInRange(DateTime start, DateTime end)
         {
             DataTable dt = new DataTable();
@@ -42,7 +43,6 @@ namespace Software_II__Advanced__CSharp__C969
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 adapter.Fill(dt);
             }
-
 
             return dt;
         }
