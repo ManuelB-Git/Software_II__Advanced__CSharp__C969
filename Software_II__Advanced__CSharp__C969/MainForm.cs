@@ -91,8 +91,8 @@ namespace Software_II__Advanced__CSharp__C969
         private void button8_Click(object sender, EventArgs e)
         {
         
-            Application.Restart();
-        
+            this.Close();
+
 
 
         }

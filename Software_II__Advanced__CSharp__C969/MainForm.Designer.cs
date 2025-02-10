@@ -103,6 +103,8 @@
             // 
             this.button1.Location = new System.Drawing.Point(22, 338);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.MaximumSize = new System.Drawing.Size(112, 35);
+            this.button1.MinimumSize = new System.Drawing.Size(112, 35);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 35);
             this.button1.TabIndex = 11;
@@ -241,6 +243,7 @@
             // 
             // MonthCalendar_DateSelected
             // 
+            this.MonthCalendar_DateSelected.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.MonthCalendar_DateSelected.Location = new System.Drawing.Point(1434, 334);
             this.MonthCalendar_DateSelected.Name = "MonthCalendar_DateSelected";
             this.MonthCalendar_DateSelected.TabIndex = 23;
@@ -270,6 +273,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

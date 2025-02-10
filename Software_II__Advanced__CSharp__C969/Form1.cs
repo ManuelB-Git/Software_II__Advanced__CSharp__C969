@@ -2,8 +2,11 @@
 using System;
 using System.Globalization;
 using System.Resources;
+using Newtonsoft.Json;
+
 
 using System.Windows.Forms;
+using System.Net;
 
 namespace Software_II__Advanced__CSharp__C969
 {
@@ -17,12 +20,38 @@ namespace Software_II__Advanced__CSharp__C969
         {
             InitializeComponent();
             labelDisplayUserLanguage.Text = CultureInfo.CurrentUICulture.DisplayName;
-            lblLocation.Text = CultureInfo.CurrentCulture.DisplayName;
+            lblLocation.Text = GetUserLocation();
+
+
 
             _liveClock = new LiveClock(lblClock);
             _liveClock.Start();
 
 
+        }
+
+        private string GetUserLocation()
+        {
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    string json = client.DownloadString("http://ip-api.com/json");
+                    var locationData = JsonConvert.DeserializeObject<LocationResponse>(json);
+
+                    return $"{locationData.City}, {locationData.Country}";
+                }
+            }
+            catch
+            {
+                return "Location unavailable";
+            }
+        }
+
+        private class LocationResponse
+        {
+            public string Country { get; set; }
+            public string City { get; set; }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -32,10 +61,8 @@ namespace Software_II__Advanced__CSharp__C969
 
             if (ValidateUser(userName, password, out int userId))
             {
-                // Log successful login
                 UserActivityLogger.LogLogin(userName, DateTime.UtcNow);
 
-                // Open main form and pass the userId
                 MainForm mainForm = new MainForm(userId);
                 mainForm.Show();
                 this.Hide();
@@ -49,7 +76,7 @@ namespace Software_II__Advanced__CSharp__C969
 
         private bool ValidateUser(string userName, string password, out int userId)
         {
-            userId = -1; // Default to -1 (invalid user)
+            userId = -1; 
             bool isValidUser = false;
 
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
