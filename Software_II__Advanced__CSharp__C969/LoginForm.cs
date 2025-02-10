@@ -10,26 +10,31 @@ using System.Net;
 
 namespace Software_II__Advanced__CSharp__C969
 {
+    /// <summary>
+    /// Represents the login form for the application.
+    /// </summary>
     public partial class LoginForm : Form
     {
         ResourceManager resManager = new ResourceManager("Software_II__Advanced__CSharp__C969.Strings", typeof(LoginForm).Assembly);
         private LiveClock _liveClock;
 
-
+        /// <summary>
+        /// Initializes a new instance of the LoginForm class.
+        /// </summary>
         public LoginForm()
         {
             InitializeComponent();
             labelDisplayUserLanguage.Text = CultureInfo.CurrentUICulture.DisplayName;
             lblLocation.Text = GetUserLocation();
 
-
-
             _liveClock = new LiveClock(lblClock);
             _liveClock.Start();
-
-
         }
 
+        /// <summary>
+        /// Gets the user's location based on their IP address.
+        /// </summary>
+        /// <returns>A string representing the user's city and country.</returns>
         private string GetUserLocation()
         {
             try
@@ -48,12 +53,18 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
+        /// <summary>
+        /// Represents the response from the location API.
+        /// </summary>
         private class LocationResponse
         {
             public string Country { get; set; }
             public string City { get; set; }
         }
 
+        /// <summary>
+        /// Handles the login button click event.
+        /// </summary>
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string userName = txtUsername.Text.Trim();
@@ -74,9 +85,16 @@ namespace Software_II__Advanced__CSharp__C969
             }
         }
 
+        /// <summary>
+        /// Validates the user's credentials against the database.
+        /// </summary>
+        /// <param name="userName">The username entered by the user.</param>
+        /// <param name="password">The password entered by the user.</param>
+        /// <param name="userId">The user ID if the credentials are valid.</param>
+        /// <returns>True if the user is valid, otherwise false.</returns>
         private bool ValidateUser(string userName, string password, out int userId)
         {
-            userId = -1; 
+            userId = -1;
             bool isValidUser = false;
 
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
@@ -99,6 +117,9 @@ namespace Software_II__Advanced__CSharp__C969
             return isValidUser;
         }
 
+        /// <summary>
+        /// Handles the close button click event.
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -106,3 +127,4 @@ namespace Software_II__Advanced__CSharp__C969
     }
 }
  
+

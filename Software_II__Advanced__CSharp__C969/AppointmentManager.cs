@@ -2,12 +2,12 @@
 
 namespace Software_II__Advanced__CSharp__C969
 {
+    // This class manages appointments by providing methods to add, update, and delete appointments.
     public static class AppointmentManager
     {
-      
+        // Adds a new appointment to the system.
         public static void AddAppointment(Appointment appt)
         {
-           
             if (appt == null)
                 throw new ArgumentNullException(nameof(appt));
             if (string.IsNullOrWhiteSpace(appt.Title))
@@ -29,7 +29,7 @@ namespace Software_II__Advanced__CSharp__C969
                 appt.CreatedBy);
         }
 
-      
+        // Updates an existing appointment in the system.
         public static void UpdateAppointment(Appointment appt)
         {
             if (appt == null)
@@ -54,6 +54,7 @@ namespace Software_II__Advanced__CSharp__C969
                 appt.UpdatedBy);
         }
 
+        // Deletes an appointment from the system.
         public static void DeleteAppointment(int appointmentId)
         {
             if (appointmentId <= 0)
