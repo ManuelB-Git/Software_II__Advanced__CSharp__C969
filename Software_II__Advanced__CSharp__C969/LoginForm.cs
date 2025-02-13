@@ -80,8 +80,19 @@ namespace Software_II__Advanced__CSharp__C969
             }
             else
             {
-                string errorMessage = resManager.GetString("loginInvalid", CultureInfo.CurrentUICulture);
-                MessageBox.Show(errorMessage, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // If login fails, display a localized error message
+                string userLanguage = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+
+                try
+                {
+                    string errorMessage = resManager.GetString("loginInvalid", new CultureInfo(userLanguage));
+
+                    MessageBox.Show(errorMessage ?? "Default error message", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

@@ -44,23 +44,26 @@
             // 
             // txtCustomerName
             // 
-            this.txtCustomerName.Location = new System.Drawing.Point(291, 151);
+            this.txtCustomerName.Location = new System.Drawing.Point(235, 100);
+            this.txtCustomerName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(201, 20);
+            this.txtCustomerName.Size = new System.Drawing.Size(300, 26);
             this.txtCustomerName.TabIndex = 0;
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(291, 177);
+            this.txtAddress.Location = new System.Drawing.Point(235, 140);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(201, 20);
+            this.txtAddress.Size = new System.Drawing.Size(300, 26);
             this.txtAddress.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(291, 281);
+            this.button1.Location = new System.Drawing.Point(235, 300);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(112, 35);
             this.button1.TabIndex = 3;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
@@ -68,9 +71,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(417, 281);
+            this.button2.Location = new System.Drawing.Point(425, 300);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(112, 35);
             this.button2.TabIndex = 4;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
@@ -79,75 +83,83 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(203, 151);
+            this.label1.Location = new System.Drawing.Point(103, 100);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.Size = new System.Drawing.Size(124, 20);
             this.label1.TabIndex = 5;
             this.label1.Text = "Customer Name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(193, 177);
+            this.label2.Location = new System.Drawing.Point(89, 140);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.Size = new System.Drawing.Size(141, 20);
             this.label2.TabIndex = 6;
             this.label2.Text = "Customer Address";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(221, 229);
+            this.label5.Location = new System.Drawing.Point(131, 220);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.Size = new System.Drawing.Size(95, 20);
             this.label5.TabIndex = 12;
             this.label5.Text = "Postal Code";
             // 
             // txtPostalCode
             // 
-            this.txtPostalCode.Location = new System.Drawing.Point(291, 229);
+            this.txtPostalCode.Location = new System.Drawing.Point(235, 220);
+            this.txtPostalCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPostalCode.Name = "txtPostalCode";
-            this.txtPostalCode.Size = new System.Drawing.Size(201, 20);
+            this.txtPostalCode.Size = new System.Drawing.Size(300, 26);
             this.txtPostalCode.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(207, 255);
+            this.label6.Location = new System.Drawing.Point(109, 260);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 13);
+            this.label6.Size = new System.Drawing.Size(115, 20);
             this.label6.TabIndex = 14;
             this.label6.Text = "Phone Number";
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(291, 255);
+            this.txtPhone.Location = new System.Drawing.Point(235, 260);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(201, 20);
+            this.txtPhone.Size = new System.Drawing.Size(300, 26);
             this.txtPhone.TabIndex = 13;
             // 
             // comboBoxCity
             // 
             this.comboBoxCity.FormattingEnabled = true;
-            this.comboBoxCity.Location = new System.Drawing.Point(371, 202);
+            this.comboBoxCity.Location = new System.Drawing.Point(355, 179);
+            this.comboBoxCity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxCity.Name = "comboBoxCity";
-            this.comboBoxCity.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCity.Size = new System.Drawing.Size(180, 28);
             this.comboBoxCity.TabIndex = 15;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 202);
+            this.label3.Location = new System.Drawing.Point(191, 179);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 13);
+            this.label3.Size = new System.Drawing.Size(35, 20);
             this.label3.TabIndex = 16;
             this.label3.Text = "City";
             // 
             // AddCustomerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(678, 444);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBoxCity);
             this.Controls.Add(this.label6);
@@ -160,7 +172,11 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtCustomerName);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximumSize = new System.Drawing.Size(700, 500);
+            this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "AddCustomerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddCustomerForm";
             this.Load += new System.EventHandler(this.AddCustomerForm_Load);
             this.ResumeLayout(false);
