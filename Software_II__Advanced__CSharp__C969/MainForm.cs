@@ -306,6 +306,16 @@ namespace Software_II__Advanced__CSharp__C969
 
             dataGridView1.DataSource = appointments;
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblClock_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
