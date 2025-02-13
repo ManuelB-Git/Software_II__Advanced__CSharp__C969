@@ -68,7 +68,7 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(1068, 418);
+            this.button4.Location = new System.Drawing.Point(1071, 418);
             this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(105, 35);
@@ -80,7 +80,7 @@
             // button6
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(948, 418);
+            this.button6.Location = new System.Drawing.Point(951, 418);
             this.button6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(105, 35);
@@ -92,7 +92,7 @@
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(828, 418);
+            this.button5.Location = new System.Drawing.Point(831, 418);
             this.button5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(105, 35);
@@ -116,7 +116,7 @@
             // button7
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.Location = new System.Drawing.Point(989, 6);
+            this.button7.Location = new System.Drawing.Point(863, 9);
             this.button7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(93, 40);
@@ -128,7 +128,7 @@
             // button8
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.Location = new System.Drawing.Point(1090, 6);
+            this.button8.Location = new System.Drawing.Point(964, 9);
             this.button8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(93, 40);
@@ -142,7 +142,7 @@
             this.lblClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblClock.AutoSize = true;
             this.lblClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClock.Location = new System.Drawing.Point(881, 9);
+            this.lblClock.Location = new System.Drawing.Point(1083, 9);
             this.lblClock.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClock.MinimumSize = new System.Drawing.Size(100, 45);
             this.lblClock.Name = "lblClock";
@@ -188,10 +188,12 @@
             // btnMonth
             // 
             this.btnMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMonth.Location = new System.Drawing.Point(1054, 361);
+            this.btnMonth.AutoSize = true;
+            this.btnMonth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMonth.Location = new System.Drawing.Point(1050, 361);
             this.btnMonth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMonth.Name = "btnMonth";
-            this.btnMonth.Size = new System.Drawing.Size(132, 35);
+            this.btnMonth.Size = new System.Drawing.Size(121, 30);
             this.btnMonth.TabIndex = 21;
             this.btnMonth.Text = "Current Month";
             this.btnMonth.UseVisualStyleBackColor = true;
@@ -200,10 +202,12 @@
             // btnWeek
             // 
             this.btnWeek.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWeek.Location = new System.Drawing.Point(920, 361);
+            this.btnWeek.AutoSize = true;
+            this.btnWeek.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnWeek.Location = new System.Drawing.Point(914, 361);
             this.btnWeek.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnWeek.Name = "btnWeek";
-            this.btnWeek.Size = new System.Drawing.Size(126, 35);
+            this.btnWeek.Size = new System.Drawing.Size(117, 30);
             this.btnWeek.TabIndex = 20;
             this.btnWeek.Text = "Current Week";
             this.btnWeek.UseVisualStyleBackColor = true;
@@ -234,10 +238,12 @@
             // btnDefault
             // 
             this.btnDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDefault.Location = new System.Drawing.Point(800, 361);
+            this.btnDefault.AutoSize = true;
+            this.btnDefault.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDefault.Location = new System.Drawing.Point(758, 361);
             this.btnDefault.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDefault.Name = "btnDefault";
-            this.btnDefault.Size = new System.Drawing.Size(112, 35);
+            this.btnDefault.Size = new System.Drawing.Size(139, 30);
             this.btnDefault.TabIndex = 19;
             this.btnDefault.Text = "All Appointments";
             this.btnDefault.UseVisualStyleBackColor = true;
@@ -257,7 +263,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(593, 359);
+            this.dateTimePicker1.Location = new System.Drawing.Point(551, 359);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 26);
             this.dateTimePicker1.TabIndex = 24;
@@ -265,8 +271,7 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1190, 777);
             this.Controls.Add(this.dateTimePicker1);
