@@ -116,12 +116,6 @@
     <Compile Include="Appointment.cs" />
     <Compile Include="AppointmentDAO.cs" />
     <Compile Include="AppointmentFilter.cs" />
-    <Compile Include="AppointmentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AppointmentForm.Designer.cs">
-      <DependentUpon>AppointmentForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="AppointmentManager.cs" />
     <Compile Include="BusinessHoursException.cs" />
     <Compile Include="CityDAO.cs" />
@@ -168,9 +162,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddCustomerForm.resx">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AppointmentForm.resx">
-      <DependentUpon>AppointmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

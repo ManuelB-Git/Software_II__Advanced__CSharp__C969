@@ -63,6 +63,16 @@ namespace Software_II__Advanced__CSharp__C969
         // Event handler for form load
         private void MainForm_Load(object sender, EventArgs e)
         {
+            dataGridView1.Height = dataGridView1.Rows.GetRowsHeight(DataGridViewElementStates.Visible)
+                       + dataGridView1.ColumnHeadersHeight + 2;
+
+            dataGridView2.Height = dataGridView1.Rows.GetRowsHeight(DataGridViewElementStates.Visible)
+                       + dataGridView1.ColumnHeadersHeight + 2;
+
+
+
+     
+
             reminderTimer = new Timer();
             reminderTimer.Interval = 60000;
             reminderTimer.Tick += ReminderTimer_Tick;
@@ -286,6 +296,15 @@ namespace Software_II__Advanced__CSharp__C969
             {
                 loginForm.Show();
             }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime selectedDate = dateTimePicker1.Value.Date;
+
+            DataTable appointments = AppointmentFilter.GetAppointmentsForDay(selectedDate);
+
+            dataGridView1.DataSource = appointments;
         }
     }
 }
